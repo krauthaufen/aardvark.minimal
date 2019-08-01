@@ -16,15 +16,15 @@ let main argv =
     Ag.initialize(); Aardvark.Init()
 
     // create simple render window
-    use app = new VulkanApplication()
-    let win = app.CreateGameWindow(8)
-    win.Title <- "Hello World (aardvark.docs)"
+    //use app = new VulkanApplication()
+    use win =
+        window {
+            backend Backend.GL
+            samples 8
+            debug false
+            initialCamera (CameraView.lookAt (V3d(9.3, 9.9, 8.6)) V3d.Zero V3d.OOI)
+        }
 
-    // view, projection and default camera controllers
-    let initialView = CameraView.lookAt (V3d(9.3, 9.9, 8.6)) V3d.Zero V3d.OOI
-    let view = initialView |> DefaultCameraController.control win.Mouse win.Keyboard win.Time
-    let proj = win.Sizes |> Mod.map (fun s -> Frustum.perspective 60.0 0.1 1000.0 (float s.X / float s.Y))
-    
     // generate 11 x 11 x 11 colored boxes
     let norm x = (x + 5.0) * 0.1
     let boxes = seq {
@@ -45,15 +45,8 @@ let main argv =
                 DefaultSurfaces.vertexColor |> toEffect
                 DefaultSurfaces.simpleLighting |> toEffect
                ]
-            |> Sg.viewTrafo (view |> Mod.map CameraView.viewTrafo)
-            |> Sg.projTrafo (proj |> Mod.map Frustum.projTrafo)
-
-    // specify render task
-    let task =
-        app.Runtime.CompileRender(win.FramebufferSignature, sg)
-            //|> DefaultOverlays.withStatistics
 
     // start
-    win.RenderTask <- task
+    win.Scene <- sg
     win.Run()
     0

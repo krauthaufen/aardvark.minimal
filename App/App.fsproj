@@ -9,6 +9,11 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Aardvark.Application.Utilities" Version="4.10.3" />
+    <PackageReference Include="Aardvark.SceneGraph" Version="4.10.3" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\bin\Debug</OutputPath>
   </PropertyGroup>
@@ -18,20 +23,5 @@
   <PropertyGroup>
     <RunWorkingDirectory>$(OutputPath)\$(TargetFramework)</RunWorkingDirectory>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Aardvark.Application.Slim" Version="4.10.2" />
-    <PackageReference Include="Aardvark.Application.Slim.GL" Version="4.10.2" />
-    <PackageReference Include="Aardvark.Application.Slim.Vulkan" Version="4.10.2" />
-
-    <PackageReference Include="Aardvark.Base" Version="4.5.8" />
-    <PackageReference Include="Aardvark.Base.FSharp" Version="4.5.8" />
-    <PackageReference Include="Aardvark.Base.Incremental" Version="4.5.8" />
-    
-    <PackageReference Include="Aardvark.Base.Rendering" Version="4.10.2" />
-    <PackageReference Include="Aardvark.SceneGraph" Version="4.10.2" />
-    <PackageReference Include="Aardvark.SceneGraph.IO" Version="4.10.2" />
-    <PackageReference Include="FsPickler" Version="5.2.2" />
-  </ItemGroup>
 
 </Project>
